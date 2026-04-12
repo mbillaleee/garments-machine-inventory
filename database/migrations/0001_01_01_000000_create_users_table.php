@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->foreignId('factory_id')->nullable()->constrained('factories'); // অথবা আপনার factory টেবিলের নাম
+            $table->boolean('multi_company')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
