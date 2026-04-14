@@ -22,5 +22,10 @@ class Factory extends Model
         return $this->hasMany(Role::class);
     }
 
+    public function locations()
+    {
+        return $this->hasMany(Location::class, 'factory_id');
+    }
+
     // public function machines() { return $this->hasMany(Machine::class); }
 }

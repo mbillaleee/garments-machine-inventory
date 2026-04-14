@@ -6,7 +6,7 @@
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">MachinaTrack</span>
     </a>
 
     <!-- Sidebar -->
@@ -142,7 +142,7 @@
                 </a>
                </li>
                <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.needletypes.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>
                     Needle Types
@@ -202,7 +202,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              
+               <li class="nav-item has-treeview">
+                <a href="{{ route('admin.locations.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Locations
+                  </p>
+                </a>
+               </li>
               <li class="nav-item has-treeview">
                 <a href="javascript:void(0)" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -237,6 +244,15 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>
                     Suppliers
+                  </p>
+                </a>
+               </li>
+
+               <li class="nav-item has-treeview">
+                <a href="{{ route('admin.departments.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Departments
                   </p>
                 </a>
                </li>

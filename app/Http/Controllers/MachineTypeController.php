@@ -10,9 +10,17 @@ class MachineTypeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $machineTypes = MachineType::latest()->paginate(10);
+        
+         $perPage = $request->per_page ?? 10;
+
+        // security: limit control
+        if (!in_array($perPage, [10, 50, 100, 500])) {
+            $perPage = 10;
+        }
+
+        $machineTypes = MachineType::latest()->paginate($perPage);
         return view('admin.machine_types.index', compact('machineTypes'));
     }
 

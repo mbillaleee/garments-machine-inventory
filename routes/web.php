@@ -10,7 +10,12 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\MachineTypeController;
 use App\Http\Controllers\ModelsController;
 use App\Http\Controllers\MachineSummaryController;
+use App\Http\Controllers\NeedleTypeController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\DepartmentController;
+
+
 
 
 Route::get('/', function () {
@@ -53,6 +58,20 @@ Route::middleware('auth')->group(function () {
         Route::resource('suppliers', SupplierController::class);
         Route::get('/supplier/deleted-items', [SupplierController::class, 'deletedItems'])->name('suppliers.deleteditems');
         Route::post('/supplier/{supplier}/restore', [SupplierController::class, 'restore'])->name('suppliers.restore');
+
+        Route::resource('needletypes', NeedleTypeController::class);
+        Route::get('/needletype/deleted-items', [NeedleTypeController::class, 'deletedItems'])->name('needletype.deleteditems');
+        Route::post('/needletype/{needleTypes}/restore', [NeedleTypeController::class, 'restore'])->name('needletype.restore');
+
+
+        Route::resource('locations', LocationController::class);
+        Route::get('/location/deleted-items', [LocationController::class, 'deletedItems'])->name('locations.deleteditems');
+        Route::post('/location/{location}/restore', [LocationController::class, 'restore'])->name('locations.restore');
+
+
+        Route::resource('departments', DepartmentController::class);
+        Route::get('/department/deleted-items', [DepartmentController::class, 'deletedItems'])->name('departments.deleteditems');
+        Route::post('/department/{department}/restore', [DepartmentController::class, 'restore'])->name('departments.restore');
 
     });
 });

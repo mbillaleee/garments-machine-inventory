@@ -53,20 +53,32 @@
 
 {{-- @dd('Dashboard View', auth()->user(), auth()->user()->factory_id, session('current_factory_id'), auth()->user()->canAccessFactory(session('current_factory_id'))); --}}
     <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Dashboard</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+    <div class="container-fluid">
+
+        <!-- 🔔 Developing Marquee Alert -->
+        <div class="alert alert-warning py-2 px-3 mb-3" style="overflow: hidden;">
+            <marquee behavior="scroll" direction="left" scrollamount="6" style="font-size: large;">
+                🚧 System is under development... Some features may not work properly | 
+                🚀 New updates coming soon | 
+                ⚙️ Maintenance & improvements in progress
+            </marquee>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Dashboard</h1>
+            </div>
+
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </div>
+        </div>
+
     </div>
+</div>
    <section class="content">
 <div class="container-fluid">
 

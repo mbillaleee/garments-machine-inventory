@@ -37,5 +37,13 @@ class AppServiceProvider extends ServiceProvider
                 // Service, MachineUsage, IdleMachine — সব মডেলের জন্য একইভাবে করুন
             }
             // যদি session খালি থাকে → TEAM GROUP (সব ফ্যাক্টরির ডেটা) দেখাবে, কোনো scope লাগবে না
+
+
+            $factories = \App\Models\Factory::all();
+            view()->share('factories', $factories);
+
+
+
+
     }
 }

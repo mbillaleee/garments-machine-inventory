@@ -47,7 +47,7 @@
         @csrf
         <select name="factory_id" onchange="this.form.submit()" 
           class="form-control form-control-sm">
-          <option value="">TEAM GROUP (All)</option>
+          <option value="">ABC GROUP (All)</option>
           @foreach(\App\Models\Factory::all() as $factory)
             <option value="{{ $factory->id }}"
               {{ session('current_factory_id') == $factory->id ? 'selected' : '' }}>
