@@ -90,14 +90,14 @@
                 ['title' => 'Machine Inventory', 'count' => '53%', 'icon' => 'fa-chart-line', 'color' => 'success'],
                 ['title' => 'Rent Machines', 'count' => 44, 'icon' => 'fa-hand-holding', 'color' => 'warning'],
                 ['title' => 'Machines in Use', 'count' => 65, 'icon' => 'fa-industry', 'color' => 'danger'],
-                ['title' => 'Service To Do', 'count' => 65, 'icon' => 'fa-tools', 'color' => 'info'],
-                ['title' => 'Service Done', 'count' => 65, 'icon' => 'fa-check-circle', 'color' => 'success'],
+                ['title' => 'Service To Do', 'count' => 25, 'icon' => 'fa-tools', 'color' => 'info'],
+                ['title' => 'Service Done', 'count' => 40, 'icon' => 'fa-check-circle', 'color' => 'success'],
                 ['title' => 'Machine Uses', 'count' => 65, 'icon' => 'fa-sync', 'color' => 'primary'],
-                ['title' => 'Breakdowns', 'count' => 65, 'icon' => 'fa-exclamation-triangle', 'color' => 'danger'],
+                ['title' => 'Breakdowns', 'count' => "30%", 'icon' => 'fa-exclamation-triangle', 'color' => 'danger'],
                 ['title' => 'MTTR', 'count' => 65, 'icon' => 'fa-clock', 'color' => 'info'],
-                ['title' => 'MTBF', 'count' => 65, 'icon' => 'fa-chart-bar', 'color' => 'success'],
-                ['title' => 'Idle Machines', 'count' => 65, 'icon' => 'fa-pause-circle', 'color' => 'warning'],
-                ['title' => 'Overdue Services', 'count' => 65, 'icon' => 'fa-bell', 'color' => 'danger'],
+                ['title' => 'MTBF', 'count' => 50, 'icon' => 'fa-chart-bar', 'color' => 'success'],
+                ['title' => 'Idle Machines', 'count' => 87, 'icon' => 'fa-pause-circle', 'color' => 'warning'],
+                ['title' => 'Overdue Services', 'count' => 20, 'icon' => 'fa-bell', 'color' => 'danger'],
             ];
         @endphp
 

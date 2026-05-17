@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\Floor;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -19,7 +20,8 @@ class LocationController extends Controller
         }
 
         $data = Location::with('factory')->latest()->paginate($perPage);
-        return view('admin.library.locations.index', compact('data'));
+        $floors = Floor::where('factory_id', auth()->user()->factory_id)->get();
+        return view('admin.library.locations.index', compact('data', 'floors'));
     }
 
     /**

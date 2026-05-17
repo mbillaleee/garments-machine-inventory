@@ -2,7 +2,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('admin.dashboard') }}" class="brand-link">
-      <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}"
+      <img src="{{ asset('images/logo.jpeg') }}"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
@@ -58,7 +58,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('admin.machines.index') }}" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>All Machine</p>
                     </a>
@@ -207,6 +207,14 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>
                     Locations
+                  </p>
+                </a>
+               </li>
+               <li class="nav-item has-treeview">
+                <a href="{{ route('admin.floors.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>
+                    Floors
                   </p>
                 </a>
                </li>

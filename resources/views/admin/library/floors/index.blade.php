@@ -54,7 +54,7 @@
     <div class="container-fluid">
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
             <div class="mb-2">
-                <h1 class="page-title mb-1">Location Management</h1>
+                <h1 class="page-title mb-1">Floor Management</h1>
             </div>
 
             <!-- <div class="mb-2 d-flex flex-wrap">
@@ -100,7 +100,7 @@
                             <div>
                                 <div class="card-title"></div>
                                 <div class="card-count text-primary">
-                                    {{ $data->count() ?? 0 }} <small class="text-muted text-sm">Total Locations</small>
+                                    {{ $data->count() ?? 0 }} <small class="text-muted text-sm">Total Floors</small>
                                 </div>
                             </div>
 
@@ -128,7 +128,7 @@
                             <div>
                                 <div class="card-title"></div>
                                 <div class="card-count text-primary">
-                                    {{ $data->count() ?? 0 }} <small class="text-muted text-sm">Active Locations</small>
+                                    {{ $data->count() ?? 0 }} <small class="text-muted text-sm">Active Floors</small>
                                     
                                 </div>
                             </div>
@@ -157,7 +157,7 @@
                             <div>
                                 <div class="card-title"></div>
                                 <div class="card-count text-primary">
-                                    {{ $data->count() ?? 0 }} <small class="text-muted text-sm">Inactive Locations</small>                                    
+                                    {{ $data->count() ?? 0 }} <small class="text-muted text-sm">Inactive Floors</small>                                    
                                 </div>
                             </div>
 
@@ -214,7 +214,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-4 mb-2 mb-md-0">
                         <h3 class="card-title font-weight-bold mb-0">
-                        <i class="fas fa-layer-group text-primary mr-2"></i>Location  List
+                        <i class="fas fa-layer-group text-primary mr-2"></i>Floor List
                         </h3>
                     </div>
                     <div class="col-md-8 d-flex justify-content-end align-items-center mb-2 mb-md-0">
@@ -252,11 +252,11 @@
                                     <i class="fas fa-file-excel text-info text-lg"></i>
                                 </button>
 
-                                <a href="{{ route('admin.locations.index') }}" class="btn btn-tool">
+                                <a href="{{ route('admin.floors.index') }}" class="btn btn-tool">
                                     <i class="fas fa-sync-alt text-success text-lg"></i>
                                 </a>
 
-                                <a href="{{ route('admin.locations.deleteditems') }}" class="btn btn-tool">
+                                <a href="{{ route('admin.floors.deleteditems') }}" class="btn btn-tool">
                                     <i class="fas fa-trash-alt text-danger text-lg"></i>
                                 </a>
 
@@ -270,7 +270,7 @@
             </div>
 
               <div class="card-header d-block d-lg-none">
-                <h3 class="card-title">Location </h3>
+                <h3 class="card-title">Floor </h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool"  data-toggle="modal" data-target="#modal-lg">
@@ -281,11 +281,11 @@
                         <i class="fas fa-file-excel text-info text-lg"></i>
                     </button>
 
-                    <a href="{{ route('admin.locations.index') }}" class="btn btn-tool">
+                    <a href="{{ route('admin.floors.index') }}" class="btn btn-tool">
                         <i class="fas fa-sync-alt text-success text-lg"></i>
                     </a>
 
-                    <a href="{{ route('admin.locations.deleteditems') }}" class="btn btn-tool">
+                    <a href="{{ route('admin.floors.deleteditems') }}" class="btn btn-tool">
                         <i class="fas fa-trash-alt text-danger text-lg"></i>
                     </a>
 
@@ -300,9 +300,7 @@
                     <table class="table table-hover text-nowrap" id="infoTable">
                         <thead>
                             <th>ID</th>
-                            <th>Floor</th>
-                            <th>Location Name</th>
-                            <th>Location Type</th>
+                            <th>Floor Name</th>
                             <th>Sort Sequence</th>
                             <th>Institution</th>
                             <th>Status</th>
@@ -318,16 +316,9 @@
                             </td>
 
                             <td>
-                                <div class="permission-name">{{ $item->floor }}</div>
+                                <div class="permission-name">{{ $item->floor_name }}</div>
                             </td>
 
-                            <td>
-                                {{ $item->location_name }}
-                            </td>
-
-                            <td>
-                                {{ $item->location_type }}
-                            </td>
 
                             <td>
                                 {{ $item->sort_sequence }}
@@ -339,37 +330,34 @@
                             </td>
                             
                             <td> 
-                            @if($item->status == 1)
-                                <span class="badge badge-primary">Active</span>
-                            @else
-                                <span class="badge badge-secondary">Inactive</span>
-                            @endif
-                        </td>
-                            <td style="text-align: center;">
+                                @if($item->status == 1)
+                                    <span class="badge badge-primary">Active</span>
+                                @else
+                                    <span class="badge badge-secondary">Inactive</span>
+                                @endif
+                            </td>
+                            <td style="">
                                 <div class="btn-group">
-                                    <button type="button" 
-                                            class="btn btn-sm btn-default dropdown-toggle" 
-                                            data-toggle="dropdown" 
-                                            aria-haspopup="true" 
-                                            aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>  <!-- 3 dots icon -->
+                                    <button type="button" class="btn btn-sm btn-default dropdown-toggle" 
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-lg-{{ $item->id }}">
                                             <i class="fas fa-edit text-primary"></i> Edit
                                         </button>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#assignFloorModal-{{ $item->id }}">
-                                            <i class="fas fa-pen text-info"></i> Assign floor
+                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-view-{{ $item->id }}">
+                                            <i class="fas fa-eye text-info"></i> View Details
                                         </a>
                                         <a class="dropdown-item" href="#">
                                             <i class="fas fa-qrcode text-success"></i> Print QR Code
                                         </a>
                                         <div class="dropdown-divider"></div>
-                                        <form method="POST" action="{{ route('admin.locations.destroy', $item->id) }}" class="d-inline">
+                                        <form method="POST" action="{{ route('admin.floors.destroy', $item->id) }}" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                                <button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this location?')">
-                                                <i class="fas fa-trash-alt text-danger"></i>
+                                                <button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this floor?')">
+                                                <i class="fas fa-trash-alt text-danger"></i> Delete
                                             </button>
                                         </form>
                                     </div>
@@ -381,7 +369,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                     <h5 class="modal-title font-weight-bold" id="addPermissionLabel">
-                                        <i class="fas fa-plus-circle text-success mr-2"></i>Update Location
+                                        <i class="fas fa-plus-circle text-success mr-2"></i>Update Floor
                                     </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -391,25 +379,14 @@
                                     <!-- Horizontal Form -->
                                     <div class="card card-info">
                                     <!-- form start -->
-                                    <form class="form-horizontal" method="POST" action="{{ route('admin.locations.update', $item->id) }}">
+                                    <form class="form-horizontal" method="POST" action="{{ route('admin.floors.update', $item->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <div class="card-body">
                                             <div class="form-group row">
-                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Location</label>
+                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Floor</label>
                                                 <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="inputEmail3" placeholder="Location Name" name="location_name" required value="{{ $item->location_name}}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Location Type</label>
-                                                <div class="col-sm-8">
-                                                    <select name="location_type" id="locationType" class="form-control">
-                                                        <option value="">Select Location Type</option>
-                                                        <option value="production" {{ $item->location_type == 'production' ? 'selected' : '' }}>Production</option>
-                                                        <option value="yard" {{ $item->location_type == 'yard' ? 'selected' : '' }}>Yard (Factory)</option>
-                                                        <option value="production_outside" {{ $item->location_type == 'production_outside' ? 'selected' : '' }}>Production (outside)</option>
-                                                    </select>
+                                                <input type="text" class="form-control" id="inputEmail3" placeholder="Floor Name" name="floor_name" required value="{{ $item->floor_name}}">
                                                 </div>
                                             </div>
 
@@ -456,56 +433,93 @@
                             </div>
                         </div>
 
-                        <div class="modal fade" id="assignFloorModal-{{ $item->id }}">
+                        <div class="modal fade" id="modal-view-{{ $item->id }}">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title font-weight-bold">
-                                            <i class="fas fa-pen text-info mr-2"></i>Assign Floor to {{ $item->location_name }}
-                                        </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                    <h5 class="modal-title font-weight-bold" id="addPermissionLabel">
+                                                            <i class="fas fa-eye mr-2"></i> Floor Details
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <form method="POST" action="{{ route('admin.locations.assignFloor', $item->id) }}">
-    @csrf
+                                    <div class="modal-body px-4 py-3">
+                                        <div class="row">
+                                            <!-- Floor Name -->
+                                            <div class="col-md-6 mb-3">
+                                                <div class="info-box bg-light">
+                                                    <span class="info-box-icon bg-primary">
+                                                        <i class="fas fa-building"></i>
+                                                    </span>
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Floor Name</span>
+                                                        <span class="info-box-number" id="view_floor_name">{{ $item->floor_name }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-    <!-- Floor -->
-    <div class="form-group row">
-        <label class="col-sm-4 col-form-label">Floor</label>
-        <div class="col-sm-8">
-            <select name="floor_id" id="floorSelect" class="form-control">
-                <option value="">Select Floor</option>
-                @foreach($floors as $floor)
-                    <option 
-                        value="{{ $floor->id }}"
-                        data-factory="{{ $floor->factory_id }}"
-                        data-factory-name="{{ $floor->factory->name ?? '' }}"
-                        {{ $item->floor_id == $floor->id ? 'selected' : '' }}>
-                        {{ $floor->floor_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-    </div>
+                                            <!-- Floor Number -->
+                                            <div class="col-md-6 mb-3">
+                                                <div class="info-box bg-light">
+                                                    <span class="info-box-icon bg-success">
+                                                        <i class="fas fa-sort-numeric-up"></i>
+                                                    </span>
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Sort Sequence</span>
+                                                        <span class="info-box-number" id="view_floor_number">{{ $item->sort_sequence }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-    <!-- Factory (Auto Fill) -->
-    <div class="form-group row">
-        <label class="col-sm-4 col-form-label">Factory</label>
-        <div class="col-sm-8">
-            <input type="text" id="factoryName" class="form-control" readonly placeholder="Auto selected">
-            <input type="hidden" name="factory_id" id="factoryId">
-        </div>
-    </div>
+                                            <!-- Status -->
+                                            <div class="col-md-6 mb-3">
+                                                <div class="info-box bg-light">
+                                                    <span class="info-box-icon bg-warning">
+                                                        <i class="fas fa-toggle-on"></i>
+                                                    </span>
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Status</span>
+                                                            @if($item->status == 1)
+                                                                <span class="badge badge-primary">Active</span>
+                                                            @else
+                                                                <span class="badge badge-secondary">Inactive</span>
+                                                            @endif
+                                                    </div>
+                                                </div>
+                                            </div>
 
-</form>
+                                            <!-- Created By -->
+                                            <div class="col-md-6 mb-3">
+                                                <div class="info-box bg-light">
+                                                    <span class="info-box-icon bg-danger">
+                                                        <i class="fas fa-user"></i>
+                                                    </span>
+                                                    <div class="info-box-content">
+                                                        <span class="info-box-text">Added By</span>
+                                                        <span class="info-box-number" id="view_added_by">{{ $item->addedByser->name ?? 'N/A' }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Description -->
+                                            <div class="col-md-12">
+                                                <div class="card border">
+                                                    <div class="card-header bg-light">
+                                                        <strong>Institution</strong>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <p id="view_institution" class="mb-0 text-muted">{{ $item->factory->name ?? 'N/A' }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                         @endforeach
                         </tbody>
                     </table>
@@ -526,7 +540,7 @@
 
                         <!-- Description -->
                         <p class="text-muted mb-4">
-                            You haven’t created any locations  yet. Start by adding your first location.
+                            You haven’t created any floors  yet. Start by adding your first floor.
                         </p>
 
                          <button type="button" class="btn btn-tool- btn-primary btn-sm"  data-toggle="modal" data-target="#modal-lg">
@@ -568,27 +582,16 @@
                 <!-- Horizontal Form -->
                 <div class="card card-info">
                 <!-- form start -->
-                <form class="form-horizontal" method="POST" action="{{ route('admin.locations.store') }}">
+                <form class="form-horizontal" method="POST" action="{{ route('admin.floors.store') }}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Location</label>
+                            <label for="inputEmail3" class="col-sm-4 col-form-label">Floor</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputEmail3" placeholder="Location" name="location_name" required>
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="Floor" name="floor_name" required>
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Location Type</label>
-                            <div class="col-sm-8">
-                                <select name="location_type" id="locationType" class="form-control">
-                                    <option value="">Select Location Type</option>
-                                    <option value="production">Production</option>
-                                    <option value="yard">Yard (Factory)</option>
-                                    <option value="production_outside">Production (outside)</option>
-                                </select>
-                            </div>
-                        </div>
 
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label">Sort Sequence</label>
@@ -635,12 +638,6 @@
     </div>
 </section>
 
-@endsection
-
-
-@section('scripts')
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const searchInput = document.getElementById('brandSearch');
@@ -673,29 +670,5 @@
             $('.alert').alert('close');
         }, 3500);
     });
-</script>
-
-<script>
-$(document).ready(function () {
-
-    function setFactory() {
-        let selected = $('#floorSelect option:selected');
-
-        let factoryId = selected.data('factory');
-        let factoryName = selected.data('factory-name');
-
-        $('#factoryId').val(factoryId);
-        $('#factoryName').val(factoryName);
-    }
-
-    // On change
-    $('#floorSelect').on('change', function () {
-        setFactory();
-    });
-
-    // On page load (edit mode)
-    setFactory();
-
-});
 </script>
 @endsection

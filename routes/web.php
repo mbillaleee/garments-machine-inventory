@@ -14,8 +14,10 @@ use App\Http\Controllers\NeedleTypeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\MachineController;
+use App\Http\Controllers\FloorController;
 
-
+ 
 
 
 Route::get('/', function () {
@@ -73,7 +75,21 @@ Route::middleware('auth')->group(function () {
         Route::get('/department/deleted-items', [DepartmentController::class, 'deletedItems'])->name('departments.deleteditems');
         Route::post('/department/{department}/restore', [DepartmentController::class, 'restore'])->name('departments.restore');
 
+        Route::resource('machines', MachineController::class);
+        Route::get('/machine/deleted-items', [MachineController::class, 'deletedItems'])->name('machines.deleteditems');
+        Route::post('/machine/{machine}/restore', [MachineController::class, 'restore'])->name('machines.restore');
+
+
+        Route::resource('floors', FloorController::class);
+        Route::get('/assign-floor/{floor}', [FloorController::class, 'assignFloor'])->name('locations.assignFloor');
+        Route::get('/floor/deleted-items', [FloorController::class, 'deletedItems'])->name('floors.deleteditems');
+        Route::post('/floor/{floor}/restore', [FloorController::class, 'restore'])->name('floors.restore');
+
     });
+});
+
+Route::get('/get-factory-by-floor/{floor_id}', function ($floor_id) {
+    return \App\Models\Factory::where('floor_id', $floor_id)->get();
 });
 
 require __DIR__.'/auth.php';

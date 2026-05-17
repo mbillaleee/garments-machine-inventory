@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Collapsed Sidebar</title>
+  <title>MachinaTrack</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,8 +20,10 @@
   <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 
+  <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
+
   <!-- DataTables -->
-  <link rel="stylesheet" href="{{ asset('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  
 
   <style>
     /* Perfect height + alignment */
@@ -31,33 +33,9 @@
     align-items: center;
     border-radius: 6px;
 }
-
-/* Text align */
-.select2-container--bootstrap4 .select2-selection__rendered {
-    line-height: normal !important;
-}
-
-/* Arrow fix */
-.select2-container--bootstrap4 .select2-selection__arrow {
-    height: 100% !important;
-}
-
-.select2-container--bootstrap4 .select2-selection {
-    padding-left: 35px;
-    position: relative;
-}
-
-.select2-container--bootstrap4 .select2-selection:before {
-    content: "\f205"; /* toggle icon */
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #6c757d;
-}
   </style>
+
+  <!-- <link rel="stylesheet" href="{{ asset('assets/dist/css/switch.css') }}"> -->
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse">
 <!-- Site wrapper -->

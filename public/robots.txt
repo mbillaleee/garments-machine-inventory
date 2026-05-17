@@ -1,2 +1,623 @@
-User-agent: *
-Disallow:
+Group-A 
+1 & 2: Rectification 
+3: Oscillation
+
+Group-B 
+4 & 5: Electrical Circuit Analysis 
+
+Group-C 
+6: Electrical Circuit Analysis and Rectification
+
+
+
+
+
+
+About this gig
+Looking to integrate the power of ChatGPT OpenAI API into your WordPress website?
+
+Look no further than my gig! With my expert integration services, you can take advantage of the latest in AI technology to automate your blog content and provide an engaging, interactive chatbot experience for your visitors and You can also Automate your Ecommerce Store.
+
+
+
+With my years of experience in WordPress development and AI integration, I can help you unlock the full potential of the ChatGPT OpenAI API. My services include seamless integration of the API into your website, customization of the chatbot to match your brand, and optimization for maximum performance and user engagement.
+
+
+
+In addition to the powerful features of the ChatGPT OpenAI API, my integration services also include:
+
+
+
+Automatic content generation With AI-power gpt
+Personalized chatbot interactions
+Enhanced user engagement
+Automate Your Ecommerce Store WIth Gpt Ai
+image Generator integration
+Ai forms
+Audio Converter integration
+Chat Gpt Training
+
+
+Note;
+
+Chat Gpt 4 integration is also available but for that prices may varies. and Also Contact Me Before Placing The Order.
+
+
+
+Regards; Aatif
+About this gig
+Are you ready to launch a powerful AI tools website designed with automation, scalability, and modern functionality in mind?
+
+
+
+I will build a fully white-label AI tools and generator website on WordPress. No coding required and easy to manage through a simple admin dashboard.
+
+
+
+What's Included:
+
+
+
+AI-powered tools website
+Chatbot builders
+Recipe generators
+Voiceover and image generators
+AI travel planner
+Resume generators
+And more AI-based tools
+
+
+This solution allows you to launch your own branded AI tools platform with structured monetization integration and scalable architecture.
+
+
+
+Monetization Setup Includes:
+
+
+
+AI credit system configuration
+Email list integration
+Subscription functionality setup
+Ads and affiliate integration setup
+
+
+Why Choose This Package:
+
+
+
+Fully customized white-label solution
+User-friendly admin management
+Modern and responsive design
+Secure payment integration
+Scalable and automation-ready structure
+
+
+Requirements:
+
+
+
+Domain
+API Access
+
+
+Contact me before placing your order to request a live demo and discuss your project requirements.
+
+About this gig
+HELLO,
+
+
+
+**Want to automate customer support, generate leads, or boost user engagement?**
+
+Let me help you integrate a smart, conversational **AI chatbot** tailored to your business needs!
+
+
+
+I specialize in building and integrating AI-powered chatbots that work 24/7, handle FAQs, collect user data, and enhance user experience all while saving you time and money.
+
+
+
+What I Offer:
+
+
+
+* Custom AI chatbot development
+
+* Integration with websites, apps, store or messaging platforms
+
+* Personalized conversation flows & natural language understanding
+
+* FAQ automation, lead generation, and booking flows
+
+* Backend/API integration for dynamic responses
+
+* Fully responsive and user-friendly design
+
+
+
+Why Choose Me?
+
+
+
+* 100% custom solution for your business
+
+* Fast delivery & clear communication
+
+* Ongoing support after delivery
+
+
+
+Ready to add AI to your customer experience?
+
+Click *Contact Me* before ordering and lets discuss your project!
+
+About this gig
+Birth of AI: 1950-1956
+
+
+
+It was too late when I heard about AI in 2012 when I was in school. I discovered AI through an article, sparking a curiosity that led It online courses and workshops. 
+
+
+
+Gradually my passion grew, and now I'm the owner of a startup. With hands-on experience, I dove deeper into research and development, and eventually, now I'm leading teams and contributing to help people get in touch with AI with mobile app development including: 
+
+
+
+- AI Applications
+
+- AI Agents
+
+- Custom GPT Apps
+
+- AI Integrations
+
+- AI Chatbot
+
+- AI Model Fine-Tuning
+
+
+
+- Platform:
+
+
+
+Android
+iOS
+
+
+- Design Tool:
+
+
+
+Figma
+
+
+- Technology:
+
+
+
+   Flutter,
+   Dart
+   React.Js
+   Next.Js
+   Node.Js
+   Express.Js
+
+
+My gig includes:
+
+
+
+AI-based web or mobile app development using OpenAI's ChatGPT
+Tailored solutions to meet your specific needs
+User-friendly and intuitive design
+High-quality code that is easy to maintain
+Professional and prompt customer service
+And many more....
+
+
+Ready to elevate your app with cutting-edge AI features, send me a message now with a single click on the "Contact Me" button.
+
+About this gig
+Transform Your Business with a Powerful AI Chatbot
+
+Looking to enhance your customer experience with a smart and efficient chatbot? I specialize in developing fully custom AI-powered chatbots tailored to your business goals. Whether you're aiming to improve customer support, automate processes, or generate leads, I can deliver a solution that fits.
+
+
+
+What You'll Get
+
+I provide high-quality chatbot solutions designed to be scalable, secure, and easy to use. My services include:
+
+Custom chatbot development using GPT-4, Dialogflow, Rasa, or Microsoft Bot Framework
+Cross-platform integration with WhatsApp (via Twilio), Facebook Messenger, Slack, and websites
+Retrieval-Augmented Generation (RAG) for dynamic responses based on your documents or data
+Pre-set conversational journeys to guide users through seamless interactions
+CRM or database integration for personalized, data-driven responses
+User authentication for role-based or secure access
+Multi-language support to engage users across regions
+Clean, documented source code included in applicable packages
+
+About this gig
+Do you want to enhance your business with an AI-powered chatbot that delivers natural, human-like responses?
+
+
+
+Whether you need a brand-new ManyChat AI chatbot or want to optimize your existing flows, I'm here to help you streamline operations and boost engagement across multiple platforms.
+
+
+
+What Can an AI Chatbot Do for You?
+
+
+
+Instantly respond to customer inquiries
+Schedule appointments & manage bookings
+Provide 24/7 automated support
+Generate and qualify leads
+Reply to comments & messages
+Seamlessly integrate with your website
+
+
+Platforms I Build Chatbots For:
+
+
+
+Facebook Messenger
+Instagram DM
+WhatsApp
+Telegram
+TikTok
+Websites
+
+
+Key Features Included:
+
+
+
+ChatGPT Integration (Smart, human-like conversations)
+External Integrations (GHL, Zapier, Google Sheets & more)
+Advanced Automations
+
+
+Why Choose This Service?
+
+
+
+A well-designed AI chatbot saves time, boosts engagement, and enhances customer satisfaction working 24/7 to grow your business.
+
+
+
+Ready to level up?
+
+Order now or message me for a free consultation!
+
+
+
+
+
+
+Build a complete "Teacher / Instructor Module" for a Learning Management System (LMS) using Laravel (backend) and a clean, modern admin + instructor dashboard UI.
+
+The system must support instructors creating and selling courses, managing their own content, and tracking earnings.
+
+-----------------------------------
+
+CORE CONCEPT
+
+-----------------------------------
+
+- Multi-role system: Admin, Instructor (Teacher), Student
+
+- Instructors can:
+
+  - Create & manage courses
+
+  - Sell courses
+
+  - Track earnings
+
+  - View students & enrollments
+
+- Admin can:
+
+  - Approve instructors
+
+  - Approve courses (optional)
+
+  - Control commissions
+
+-----------------------------------
+
+DATABASE STRUCTURE
+
+-----------------------------------
+
+1. USERS TABLE (extend existing)
+
+- id
+
+- name
+
+- email
+
+- password
+
+- role (admin, instructor, student)
+
+- status (active, inactive)
+
+- created_at
+
+2. INSTRUCTORS TABLE
+
+- id
+
+- user_id (foreign key)
+
+- bio (text)
+
+- expertise (string)
+
+- profile_image (string)
+
+- social_links (json)
+
+- payout_email (string)
+
+- is_approved (boolean)
+
+- created_at
+
+3. COURSES TABLE
+
+- id
+
+- instructor_id
+
+- title
+
+- slug
+
+- description
+
+- price
+
+- thumbnail
+
+- status (draft, pending, approved, rejected)
+
+- created_at
+
+4. ENROLLMENTS TABLE
+
+- id
+
+- user_id (student)
+
+- course_id
+
+- payment_status
+
+- created_at
+
+5. PAYMENTS TABLE
+
+- id
+
+- user_id
+
+- course_id
+
+- amount
+
+- instructor_earning
+
+- admin_commission
+
+- payment_method
+
+- created_at
+
+-----------------------------------
+
+FUNCTIONAL REQUIREMENTS
+
+-----------------------------------
+
+INSTRUCTOR FEATURES:
+
+- Register as instructor
+
+- Update profile (bio, image, social links)
+
+- Create/edit/delete courses
+
+- Upload course content (future expandable)
+
+- Set course price
+
+- Submit course for approval (optional)
+
+- View enrolled students
+
+- View earnings dashboard
+
+- Withdraw request system (optional)
+
+ADMIN FEATURES:
+
+- Approve/reject instructors
+
+- Approve/reject courses
+
+- Set commission percentage
+
+- View all instructors
+
+- View all courses
+
+- Monitor earnings
+
+-----------------------------------
+
+INSTRUCTOR DASHBOARD
+
+-----------------------------------
+
+Create a separate Instructor Dashboard with:
+
+- Overview stats:
+
+  - Total courses
+
+  - Total students
+
+  - Total earnings
+
+  - Monthly revenue
+
+- Sections:
+
+  1. My Courses
+
+  2. Create Course
+
+  3. Students
+
+  4. Earnings
+
+  5. Profile Settings
+
+UI must be clean, card-based, and responsive.
+
+-----------------------------------
+
+ROUTES STRUCTURE
+
+-----------------------------------
+
+- /instructor/dashboard
+
+- /instructor/courses
+
+- /instructor/courses/create
+
+- /instructor/courses/edit/{id}
+
+- /instructor/students
+
+- /instructor/earnings
+
+- /instructor/profile
+
+Use middleware:
+
+- auth
+
+- role:instructor
+
+-----------------------------------
+
+CONTROLLER REQUIREMENTS
+
+-----------------------------------
+
+Create:
+
+- InstructorController
+
+- InstructorCourseController
+
+- InstructorDashboardController
+
+Functions:
+
+- dashboard()
+
+- createCourse()
+
+- storeCourse()
+
+- editCourse()
+
+- updateCourse()
+
+- deleteCourse()
+
+- earnings()
+
+- students()
+
+-----------------------------------
+
+SECURITY
+
+-----------------------------------
+
+- Only instructors can access instructor routes
+
+- Instructor can only manage their own courses
+
+- Validate all inputs
+
+- Protect file uploads
+
+-----------------------------------
+
+PAYMENT LOGIC
+
+-----------------------------------
+
+- When a student purchases a course:
+
+  - Calculate instructor earning
+
+  - Deduct admin commission
+
+  - Store in payments table
+
+-----------------------------------
+
+EXTRA FEATURES (IMPORTANT)
+
+-----------------------------------
+
+- Slug auto generation for courses
+
+- Image upload system (thumbnail)
+
+- Pagination for courses/students
+
+- Search/filter courses
+
+- Cache dashboard stats
+
+- Helper: auth()->user()->instructor
+
+-----------------------------------
+
+OUTPUT REQUIREMENTS
+
+-----------------------------------
+
+Generate:
+
+- Migration files
+
+- Models with relationships
+
+- Controllers with full logic
+
+- Instructor dashboard Blade UI
+
+- Routes
+
+- Middleware
+
+- Clean, scalable architecture
+
+The code must follow Laravel best practices and be production-ready.
+
+তোমাকে যে প্রম্প্ট দিয়েছে এর বাইরেও যদি কিছু করা লাগে এবং চেঞ্জ করা লাগে তুমি নিজে সিদ্ধান্ত নিয়ে করো 

@@ -1,6 +1,9 @@
 @extends('admin.layouts.master')
 
 @section('admin')
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <style>
   .dashboard-card {
     background: #fff;
@@ -50,11 +53,17 @@
 }
 </style>
 
+<style>
+    #rentFields {
+        display: none;
+    }
+</style> 
+
 <section class="content permission-page"><br>
     <div class="container-fluid">
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
             <div class="mb-2">
-                <h1 class="page-title mb-1">Location Management</h1>
+                <h1 class="page-title mb-1">Machine Management</h1>
             </div>
 
             <!-- <div class="mb-2 d-flex flex-wrap">
@@ -100,7 +109,7 @@
                             <div>
                                 <div class="card-title"></div>
                                 <div class="card-count text-primary">
-                                    {{ $data->count() ?? 0 }} <small class="text-muted text-sm">Total Locations</small>
+                                    {{ $data->count() ?? 0 }} <small class="text-muted text-sm">Total Machines</small>
                                 </div>
                             </div>
 
@@ -128,7 +137,7 @@
                             <div>
                                 <div class="card-title"></div>
                                 <div class="card-count text-primary">
-                                    {{ $data->count() ?? 0 }} <small class="text-muted text-sm">Active Locations</small>
+                                    {{ $data->count() ?? 0 }} <small class="text-muted text-sm">Active Machines</small>
                                     
                                 </div>
                             </div>
@@ -157,7 +166,7 @@
                             <div>
                                 <div class="card-title"></div>
                                 <div class="card-count text-primary">
-                                    {{ $data->count() ?? 0 }} <small class="text-muted text-sm">Inactive Locations</small>                                    
+                                    {{ $data->count() ?? 0 }} <small class="text-muted text-sm">Inactive Machines</small>                                    
                                 </div>
                             </div>
 
@@ -214,7 +223,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-4 mb-2 mb-md-0">
                         <h3 class="card-title font-weight-bold mb-0">
-                        <i class="fas fa-layer-group text-primary mr-2"></i>Location  List
+                        <i class="fas fa-layer-group text-primary mr-2"></i>Machine  List
                         </h3>
                     </div>
                     <div class="col-md-8 d-flex justify-content-end align-items-center mb-2 mb-md-0">
@@ -252,11 +261,11 @@
                                     <i class="fas fa-file-excel text-info text-lg"></i>
                                 </button>
 
-                                <a href="{{ route('admin.locations.index') }}" class="btn btn-tool">
+                                <a href="{{ route('admin.departments.index') }}" class="btn btn-tool">
                                     <i class="fas fa-sync-alt text-success text-lg"></i>
                                 </a>
 
-                                <a href="{{ route('admin.locations.deleteditems') }}" class="btn btn-tool">
+                                <a href="{{ route('admin.departments.deleteditems') }}" class="btn btn-tool">
                                     <i class="fas fa-trash-alt text-danger text-lg"></i>
                                 </a>
 
@@ -281,11 +290,11 @@
                         <i class="fas fa-file-excel text-info text-lg"></i>
                     </button>
 
-                    <a href="{{ route('admin.locations.index') }}" class="btn btn-tool">
+                    <a href="{{ route('admin.departments.index') }}" class="btn btn-tool">
                         <i class="fas fa-sync-alt text-success text-lg"></i>
                     </a>
 
-                    <a href="{{ route('admin.locations.deleteditems') }}" class="btn btn-tool">
+                    <a href="{{ route('admin.departments.deleteditems') }}" class="btn btn-tool">
                         <i class="fas fa-trash-alt text-danger text-lg"></i>
                     </a>
 
@@ -300,10 +309,7 @@
                     <table class="table table-hover text-nowrap" id="infoTable">
                         <thead>
                             <th>ID</th>
-                            <th>Floor</th>
-                            <th>Location Name</th>
-                            <th>Location Type</th>
-                            <th>Sort Sequence</th>
+                            <th>Department</th>
                             <th>Institution</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -318,19 +324,7 @@
                             </td>
 
                             <td>
-                                <div class="permission-name">{{ $item->floor }}</div>
-                            </td>
-
-                            <td>
-                                {{ $item->location_name }}
-                            </td>
-
-                            <td>
-                                {{ $item->location_type }}
-                            </td>
-
-                            <td>
-                                {{ $item->sort_sequence }}
+                                <div class="permission-name">{{ $item->department_name }}</div>
                             </td>
 
 
@@ -343,37 +337,19 @@
                                 <span class="badge badge-primary">Active</span>
                             @else
                                 <span class="badge badge-secondary">Inactive</span>
-                            @endif
-                        </td>
-                            <td style="text-align: center;">
-                                <div class="btn-group">
-                                    <button type="button" 
-                                            class="btn btn-sm btn-default dropdown-toggle" 
-                                            data-toggle="dropdown" 
-                                            aria-haspopup="true" 
-                                            aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>  <!-- 3 dots icon -->
+                            @endif</td>
+                            <td>
+                                <button type="button" class="btn btn-tool" data-toggle="modal" data-target="#modal-lg-{{ $item->id }}">
+                                    <i class="fas fa-edit text-primary text-lg"></i>
+                                </button>
+
+                                <form method="POST" action="{{ route('admin.departments.destroy', $item->id) }}" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                        <button type="submit" class="btn btn-tool" onclick="return confirm('Are you sure you want to delete this department?')">
+                                        <i class="fas fa-trash-alt text-danger text-lg"></i>
                                     </button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#modal-lg-{{ $item->id }}">
-                                            <i class="fas fa-edit text-primary"></i> Edit
-                                        </button>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#assignFloorModal-{{ $item->id }}">
-                                            <i class="fas fa-pen text-info"></i> Assign floor
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="fas fa-qrcode text-success"></i> Print QR Code
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <form method="POST" action="{{ route('admin.locations.destroy', $item->id) }}" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                                <button type="submit" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this location?')">
-                                                <i class="fas fa-trash-alt text-danger"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
+                                </form>
                             </td>
                         </tr>
                         <div class="modal fade" id="modal-lg-{{ $item->id }}">
@@ -381,7 +357,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                     <h5 class="modal-title font-weight-bold" id="addPermissionLabel">
-                                        <i class="fas fa-plus-circle text-success mr-2"></i>Update Location
+                                        <i class="fas fa-plus-circle text-success mr-2"></i>Update Department
                                     </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -391,40 +367,23 @@
                                     <!-- Horizontal Form -->
                                     <div class="card card-info">
                                     <!-- form start -->
-                                    <form class="form-horizontal" method="POST" action="{{ route('admin.locations.update', $item->id) }}">
+                                    <form class="form-horizontal" method="POST" action="{{ route('admin.departments.update', $item->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <div class="card-body">
                                             <div class="form-group row">
-                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Location</label>
+                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Department Name</label>
                                                 <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="inputEmail3" placeholder="Location Name" name="location_name" required value="{{ $item->location_name}}">
+                                                <input type="text" class="form-control" id="inputEmail3" placeholder="Department Name" name="department_name" required value="{{ $item->department_name}}">
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Location Type</label>
-                                                <div class="col-sm-8">
-                                                    <select name="location_type" id="locationType" class="form-control">
-                                                        <option value="">Select Location Type</option>
-                                                        <option value="production" {{ $item->location_type == 'production' ? 'selected' : '' }}>Production</option>
-                                                        <option value="yard" {{ $item->location_type == 'yard' ? 'selected' : '' }}>Yard (Factory)</option>
-                                                        <option value="production_outside" {{ $item->location_type == 'production_outside' ? 'selected' : '' }}>Production (outside)</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Sort Sequence</label>
-                                                <div class="col-sm-8">
-                                                    <input type="number" class="form-control" id="sortSequence" placeholder="Sort Sequence" name="sort_sequence" required value="{{ $item->sort_sequence }}">
-                                                </div>
-                                            </div>
+                                            
 
 
                                             <div class="form-group row">
                                                 <label for="inputEmail3" class="col-sm-4 col-form-label">Factory</label>
                                                 <div class="col-sm-8">
-                                                    <select name="factory_id" id="factoryId" class="form-control">
+                                                    <select name="factory_id" id="factoryId" class="form-control select2" required>
                                                         <option value="">Select Factory</option>
                                                         @foreach($factories as $factory)
                                                             <option value="{{ $factory->id }}" {{ $item->factory_id == $factory->id ? 'selected' : '' }}>
@@ -438,7 +397,7 @@
                                             <div class="form-group row">
                                                 <label for="inputEmail3" class="col-sm-4 col-form-label">Status</label>
                                                 <div class="col-sm-8">
-                                                    <select class="form-control" name="status" required>
+                                                    <select class="form-control select2" name="status" required>
                                                         <option value="1" {{ $item->status == 1 ? 'selected' : '' }}>Active</option>
                                                         <option value="0" {{ $item->status == 0 ? 'selected' : '' }}>Inactive</option>
                                                     </select>
@@ -455,57 +414,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="modal fade" id="assignFloorModal-{{ $item->id }}">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title font-weight-bold">
-                                            <i class="fas fa-pen text-info mr-2"></i>Assign Floor to {{ $item->location_name }}
-                                        </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form method="POST" action="{{ route('admin.locations.assignFloor', $item->id) }}">
-    @csrf
-
-    <!-- Floor -->
-    <div class="form-group row">
-        <label class="col-sm-4 col-form-label">Floor</label>
-        <div class="col-sm-8">
-            <select name="floor_id" id="floorSelect" class="form-control">
-                <option value="">Select Floor</option>
-                @foreach($floors as $floor)
-                    <option 
-                        value="{{ $floor->id }}"
-                        data-factory="{{ $floor->factory_id }}"
-                        data-factory-name="{{ $floor->factory->name ?? '' }}"
-                        {{ $item->floor_id == $floor->id ? 'selected' : '' }}>
-                        {{ $floor->floor_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-    </div>
-
-    <!-- Factory (Auto Fill) -->
-    <div class="form-group row">
-        <label class="col-sm-4 col-form-label">Factory</label>
-        <div class="col-sm-8">
-            <input type="text" id="factoryName" class="form-control" readonly placeholder="Auto selected">
-            <input type="hidden" name="factory_id" id="factoryId">
-        </div>
-    </div>
-
-</form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
                         @endforeach
                         </tbody>
                     </table>
@@ -526,7 +434,7 @@
 
                         <!-- Description -->
                         <p class="text-muted mb-4">
-                            You haven’t created any locations  yet. Start by adding your first location.
+                            You haven’t created any departments  yet. Start by adding your first department.
                         </p>
 
                          <button type="button" class="btn btn-tool- btn-primary btn-sm"  data-toggle="modal" data-target="#modal-lg">
@@ -554,7 +462,7 @@
 
         {{-- Add Permission Modal --}}
         <div class="modal fade" id="modal-lg">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                 <h5 class="modal-title font-weight-bold" id="addPermissionLabel">
@@ -568,55 +476,201 @@
                 <!-- Horizontal Form -->
                 <div class="card card-info">
                 <!-- form start -->
-                <form class="form-horizontal" method="POST" action="{{ route('admin.locations.store') }}">
+                <form class="form-horizontal" method="POST" action="{{ route('admin.departments.store') }}">
                     @csrf
                     <div class="card-body">
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Location</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="inputEmail3" placeholder="Location" name="location_name" required>
-                            </div>
-                        </div>
+                        <div class="row">
 
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Location Type</label>
-                            <div class="col-sm-8">
-                                <select name="location_type" id="locationType" class="form-control">
-                                    <option value="">Select Location Type</option>
-                                    <option value="production">Production</option>
-                                    <option value="yard">Yard (Factory)</option>
-                                    <option value="production_outside">Production (outside)</option>
-                                </select>
-                            </div>
-                        </div>
+                            <!-- Left Column -->
+                            <div class="col-md-6">
 
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Sort Sequence</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" id="inputEmail3" placeholder="Sort Sequence" name="sort_sequence" min="0" required>
-                            </div>
-                        </div>
+                                <div class="form-group mb-3">
+                                    <label>Machine Inventory Number</label>
+                                    <input type="text" name="inventory_no" class="form-control" placeholder="Enter Machine Inventory Number">
+                                </div>
 
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Factory</label>
-                            <div class="col-sm-8">
-                                <select name="factory_id" id="factoryId" class="form-control">
-                                    <option value="">Select Factory</option>
-                                    @foreach($factories as $factory)
-                                        <option value="{{ $factory->id }}">{{ $factory->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                                <div class="form-group mb-3">
+                                    <label>Serial Number</label>
+                                    <input type="text" name="serial_no" class="form-control" placeholder="Enter Serial Number No">
+                                </div>
 
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Status</label>
-                            <div class="col-sm-8">
-                                <select class="form-control" name="status" required>
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
-                                </select>
+                                <div class="form-group mb-3">
+                                    <label>Service Date</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-primary text-white">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" id="serviceDate" name="purchase_date" class="form-control serviceDate" placeholder="Select Service Date">
+                                    </div>
+                                </div>
+
+                                 <div class="form-group mb-3">
+                                    <label>Service Date</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-primary text-white">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" id="serviceDate" name="service_date" class="form-control serviceDate" placeholder="Select Service Date">
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Machine Type</label>
+                                    <select name="machine_type" class="form-control select2">
+                                        <option value="">Select Machine Type</option>
+                                        @foreach($machineTypes as $type)
+                                            <option value="{{ $type->id }}">{{ $type->type_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Brand</label>
+                                    <select name="brand_id" class="form-control select2">
+                                        <option value="">Select Brand</option>
+                                        @foreach($brands as $brand)
+                                            <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Model</label>
+                                    <select name="model_id" class="form-control select2">
+                                        <option value="">Select Model</option>
+                                        @foreach($models as $model)
+                                            <option value="{{ $model->id }}">{{ $model->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Reason For Purchase</label>
+                                    <textarea name="reason" class="form-control"></textarea>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Machine Value ($)</label>
+                                    <input type="number" name="machine_value" class="form-control" placeholder="Enter Machine Value">
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Supplier</label>
+                                    <select name="supplier_id" class="form-control select2">
+                                        <option value="">Select Supplier</option>
+                                        @foreach($suppliers as $supplier)
+                                            <option value="{{ $supplier->id }}">{{ $supplier->supplier_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                             </div>
+
+                            <!-- Right Column -->
+                            <div class="col-md-6">
+
+                                <div class="form-group mb-3">
+                                    <label>Needle Type</label>
+                                    <select name="needle_type" class="form-control select2">
+                                        <option value="">Select Needle Type</option>
+                                        @foreach($needleTypes as $needle)
+                                            <option value="{{ $needle->id }}">{{ $needle->type_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Depreciation (Years)</label>
+                                    <input type="number" name="depreciation" class="form-control" placeholder="Enter Depreciation">
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Service Frequency (Days)</label>
+                                    <input type="number" name="service_frequency" class="form-control" placeholder="Enter Service Frequency">
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Guarantee Period (Year)</label>
+                                    <input type="number" name="guarantee_period" class="form-control" placeholder="Enter Guarantee Period">
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Location</label>
+                                    <select name="location_id" class="form-control select2">
+                                        <option value="">Select Location</option>
+                                        @foreach($locations as $location)
+                                            <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Stitch Formation</label>
+                                    <input type="text" name="stitch_formation" class="form-control">
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Department</label>
+                                    <select name="department_id" class="form-control select2">
+                                        <option value="">Select Department</option>
+                                        @foreach($departments as $department)
+                                            <option value="{{ $department->id }}">{{ $department->department_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label>Ownership</label>
+                                    <select name="ownership" id="ownership" class="form-control">
+                                        <option value="Company">Factory</option>
+                                        <option value="rent">Rent</option>
+                                    </select>
+                                </div>
+
+                                <div id="rentFields">
+                                    <div class="form-group mb-3">
+                                        <label>Service Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-primary text-white">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" id="serviceDate" name="rent_start_date" class="form-control serviceDate" placeholder="Select Service Date">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label>Service Date</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-primary text-white">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" id="serviceDate" name="rent_end_date" class="form-control serviceDate" placeholder="Select Service Date">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group mb-3">
+                                    <label>Factory</label>
+                                    <select name="factory_id" class="form-control select2" required>
+                                        <option value="">Select Factory</option>
+                                        @foreach($factories as $factory)
+                                            <option value="{{ $factory->id }}">{{ $factory->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
                     <div class="card-footer">
@@ -634,12 +688,6 @@
 
     </div>
 </section>
-
-@endsection
-
-
-@section('scripts')
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -673,29 +721,37 @@
             $('.alert').alert('close');
         }, 3500);
     });
+
+    
 </script>
 
 <script>
-$(document).ready(function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        const ownership = document.getElementById('ownership');
+        const rentFields = document.getElementById('rentFields');
 
-    function setFactory() {
-        let selected = $('#floorSelect option:selected');
+        function toggleRentFields() {
+            if (ownership.value === 'rent') {
+                rentFields.style.display = 'block';
+            } else {
+                rentFields.style.display = 'none';
+            }
+        }
 
-        let factoryId = selected.data('factory');
-        let factoryName = selected.data('factory-name');
+        // On change
+        ownership.addEventListener('change', toggleRentFields);
 
-        $('#factoryId').val(factoryId);
-        $('#factoryName').val(factoryName);
-    }
-
-    // On change
-    $('#floorSelect').on('change', function () {
-        setFactory();
+        // On load (important for edit mode)
+        toggleRentFields();
     });
+</script>
 
-    // On page load (edit mode)
-    setFactory();
-
-});
+<script>
+    flatpickr(".serviceDate", {
+        dateFormat: "Y-m-d",
+        altInput: true,
+        altFormat: "F j, Y", // সুন্দর format (April 30, 2026)
+        allowInput: true
+    });
 </script>
 @endsection
