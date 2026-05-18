@@ -261,11 +261,11 @@
                                     <i class="fas fa-file-excel text-info text-lg"></i>
                                 </button>
 
-                                <a href="{{ route('admin.departments.index') }}" class="btn btn-tool">
+                                <a href="{{ route('admin.machines.index') }}" class="btn btn-tool">
                                     <i class="fas fa-sync-alt text-success text-lg"></i>
                                 </a>
 
-                                <a href="{{ route('admin.departments.deleteditems') }}" class="btn btn-tool">
+                                <a href="{{ route('admin.machines.deleteditems') }}" class="btn btn-tool">
                                     <i class="fas fa-trash-alt text-danger text-lg"></i>
                                 </a>
 
@@ -290,11 +290,11 @@
                         <i class="fas fa-file-excel text-info text-lg"></i>
                     </button>
 
-                    <a href="{{ route('admin.departments.index') }}" class="btn btn-tool">
+                    <a href="{{ route('admin.machines.index') }}" class="btn btn-tool">
                         <i class="fas fa-sync-alt text-success text-lg"></i>
                     </a>
 
-                    <a href="{{ route('admin.departments.deleteditems') }}" class="btn btn-tool">
+                    <a href="{{ route('admin.machines.deleteditems') }}" class="btn btn-tool">
                         <i class="fas fa-trash-alt text-danger text-lg"></i>
                     </a>
 
@@ -309,8 +309,12 @@
                     <table class="table table-hover text-nowrap" id="infoTable">
                         <thead>
                             <th>ID</th>
-                            <th>Department</th>
-                            <th>Institution</th>
+                            <th>Inventory No</th>
+                            <th>Serial No</th>
+                            <th>Machine Type</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Factory</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </thead>
@@ -324,9 +328,24 @@
                             </td>
 
                             <td>
-                                <div class="permission-name">{{ $item->department_name }}</div>
+                                <div class="permission-name">{{ $item->machine_inventory_number }}</div>
                             </td>
 
+                            <td>
+                                {{ $item->serial_number ?? 'N/A' }}
+                            </td>
+
+                            <td>
+                                {{ $item->machineType->name ?? 'N/A' }}
+                            </td>
+
+                            <td>
+                                {{ $item->brand->name ?? 'N/A' }}
+                            </td>
+
+                            <td>
+                                {{ $item->model->name ?? 'N/A' }}
+                            </td>
 
                             <td>
                                 {{ $item->factory->name ?? 'N/A' }}
@@ -343,73 +362,171 @@
                                     <i class="fas fa-edit text-primary text-lg"></i>
                                 </button>
 
-                                <form method="POST" action="{{ route('admin.departments.destroy', $item->id) }}" class="d-inline">
+                                <form method="POST" action="{{ route('admin.machines.destroy', $item->id) }}" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                        <button type="submit" class="btn btn-tool" onclick="return confirm('Are you sure you want to delete this department?')">
+                                        <button type="submit" class="btn btn-tool" onclick="return confirm('Are you sure you want to delete this machine?')">
                                         <i class="fas fa-trash-alt text-danger text-lg"></i>
                                     </button>
                                 </form>
                             </td>
                         </tr>
                         <div class="modal fade" id="modal-lg-{{ $item->id }}">
-                            <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog modal-xl modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h5 class="modal-title font-weight-bold" id="addPermissionLabel">
-                                        <i class="fas fa-plus-circle text-success mr-2"></i>Update Department
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                        <h5 class="modal-title font-weight-bold">
+                                            <i class="fas fa-edit text-primary mr-2"></i>Edit Machine
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
                                     <div class="modal-body">
-                                    <!-- Horizontal Form -->
-                                    <div class="card card-info">
-                                    <!-- form start -->
-                                    <form class="form-horizontal" method="POST" action="{{ route('admin.departments.update', $item->id) }}">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="card-body">
-                                            <div class="form-group row">
-                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Department Name</label>
-                                                <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="inputEmail3" placeholder="Department Name" name="department_name" required value="{{ $item->department_name}}">
+                                        <div class="card card-info">
+                                            <form class="form-horizontal" method="POST" action="{{ route('admin.machines.update', $item->id) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-3">
+                                                                <label>Machine Inventory Number</label>
+                                                                <input type="text" name="machine_inventory_number" class="form-control" value="{{ old('machine_inventory_number', $item->machine_inventory_number) }}" required>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Serial Number</label>
+                                                                <input type="text" name="serial_no" class="form-control" value="{{ old('serial_no', $item->serial_number) }}">
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Purchase Date</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text bg-primary text-white">
+                                                                            <i class="fas fa-calendar-alt"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                    <input type="text" name="purchase_date" class="form-control serviceDate" value="{{ old('purchase_date', $item->purchase_date?->format('Y-m-d')) }}" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Service Date</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text bg-primary text-white">
+                                                                            <i class="fas fa-calendar-alt"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                    <input type="text" name="service_date" class="form-control serviceDate" value="{{ old('service_date', $item->service_date?->format('Y-m-d')) }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Machine Type</label>
+                                                                <select name="machine_type_id" class="form-control select2">
+                                                                    <option value="">Select Machine Type</option>
+                                                                    @foreach($machineTypes as $type)
+                                                                        <option value="{{ $type->id }}" {{ $item->machine_type_id == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Brand</label>
+                                                                <select name="brand_id" class="form-control select2">
+                                                                    <option value="">Select Brand</option>
+                                                                    @foreach($brands as $brand)
+                                                                        <option value="{{ $brand->id }}" {{ $item->brand_id == $brand->id ? 'selected' : '' }}>{{ $brand->name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Model</label>
+                                                                <select name="model_id" class="form-control select2">
+                                                                    <option value="">Select Model</option>
+                                                                    @foreach($models as $model)
+                                                                        <option value="{{ $model->id }}" {{ $item->model_id == $model->id ? 'selected' : '' }}>{{ $model->name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Reason For Purchase</label>
+                                                                <textarea name="reason" class="form-control">{{ old('reason', $item->reason_for_purchase) }}</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-3">
+                                                                <label>Machine Value ($)</label>
+                                                                <input type="number" name="machine_value" class="form-control" value="{{ old('machine_value', $item->machine_value) }}">
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Supplier</label>
+                                                                <select name="supplier_id" class="form-control select2">
+                                                                    <option value="">Select Supplier</option>
+                                                                    @foreach($suppliers as $supplier)
+                                                                        <option value="{{ $supplier->id }}" {{ $item->supplier_id    == $supplier->id ? 'selected' : '' }}>{{ $supplier->supplier_name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Needle Type</label>
+                                                                <select name="needle_type_id" class="form-control select2">
+                                                                    <option value="">Select Needle Type</option>
+                                                                    
+                                                                    @foreach($needleTypes as $needle)
+                                                                        <option value="{{ $needle->id }}" {{ $item->needle_type_id == $needle->id ? 'selected' : '' }}>{{ $needle->needle_type }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Location</label>
+                                                                <select name="location_id" class="form-control select2">
+                                                                    <option value="">Select Location</option>
+                                                                    @foreach($locations as $location)
+                                                                        <option value="{{ $location->id }}" {{ $item->location_id == $location->id ? 'selected' : '' }}>{{ $location->location_name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Department</label>
+                                                                <select name="department_id" class="form-control select2" required>
+                                                                    <option value="">Select Department</option>
+                                                                    
+                                                                    @foreach($departments as $department)
+                                                                        <option value="{{ $department->id }}" {{ $item->department_id == $department->id ? 'selected' : '' }}>{{ $department->department_name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Factory</label>
+                                                                <select name="factory_id" class="form-control select2">
+                                                                    <option value="">Select Factory</option>
+                                                                    @foreach($factories as $factory)
+                                                                        <option value="{{ $factory->id }}" {{ $item->factory_id == $factory->id ? 'selected' : '' }}>{{ $factory->short_name }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Ownership</label>
+                                                                <select name="ownership" class="form-control">
+                                                                    <option value="Company" {{ $item->ownership === 'Company' ? 'selected' : '' }}>Company</option>
+                                                                    <option value="rent" {{ $item->ownership === 'rent' ? 'selected' : '' }}>Rent</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label>Status</label>
+                                                                <select name="status" class="form-control">
+                                                                    <option value="1" {{ $item->status == 1 ? 'selected' : '' }}>Active</option>
+                                                                    <option value="0" {{ $item->status == 0 ? 'selected' : '' }}>Inactive</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            
-
-
-                                            <div class="form-group row">
-                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Factory</label>
-                                                <div class="col-sm-8">
-                                                    <select name="factory_id" id="factoryId" class="form-control select2" required>
-                                                        <option value="">Select Factory</option>
-                                                        @foreach($factories as $factory)
-                                                            <option value="{{ $factory->id }}" {{ $item->factory_id == $factory->id ? 'selected' : '' }}>
-                                                                {{ $factory->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                                                <div class="card-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
                                                 </div>
-                                            </div>
-                                           
-                                            <div class="form-group row">
-                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Status</label>
-                                                <div class="col-sm-8">
-                                                    <select class="form-control select2" name="status" required>
-                                                        <option value="1" {{ $item->status == 1 ? 'selected' : '' }}>Active</option>
-                                                        <option value="0" {{ $item->status == 0 ? 'selected' : '' }}>Inactive</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
-                                        <div class="card-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </form>
-                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -434,7 +551,7 @@
 
                         <!-- Description -->
                         <p class="text-muted mb-4">
-                            You haven’t created any departments  yet. Start by adding your first department.
+                            You haven’t created any machines yet. Start by adding your first machine.
                         </p>
 
                          <button type="button" class="btn btn-tool- btn-primary btn-sm"  data-toggle="modal" data-target="#modal-lg">
@@ -476,7 +593,7 @@
                 <!-- Horizontal Form -->
                 <div class="card card-info">
                 <!-- form start -->
-                <form class="form-horizontal" method="POST" action="{{ route('admin.departments.store') }}">
+                <form class="form-horizontal" method="POST" action="{{ route('admin.machines.store') }}">
                     @csrf
                     <div class="card-body">
                         <div class="row">
@@ -486,8 +603,9 @@
 
                                 <div class="form-group mb-3">
                                     <label>Machine Inventory Number</label>
-                                    <input type="text" name="inventory_no" class="form-control" placeholder="Enter Machine Inventory Number">
+                                    <input type="text" name="machine_inventory_number" class="form-control" placeholder="Enter Machine Inventory Number" required>
                                 </div>
+                                <input type="hidden" name="status" value="1">
 
                                 <div class="form-group mb-3">
                                     <label>Serial Number</label>
@@ -495,14 +613,14 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label>Service Date</label>
+                                    <label>Purchase Date</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-primary text-white">
                                                 <i class="fas fa-calendar-alt"></i>
                                             </span>
                                         </div>
-                                        <input type="text" id="serviceDate" name="purchase_date" class="form-control serviceDate" placeholder="Select Service Date">
+                                        <input type="text" id="serviceDate" name="purchase_date" class="form-control serviceDate" placeholder="Select Purchase Date" required>
                                     </div>
                                 </div>
 
@@ -520,7 +638,7 @@
 
                                 <div class="form-group mb-3">
                                     <label>Machine Type</label>
-                                    <select name="machine_type" class="form-control select2">
+                                    <select name="machine_type_id" class="form-control select2">
                                         <option value="">Select Machine Type</option>
                                         @foreach($machineTypes as $type)
                                             <option value="{{ $type->id }}">{{ $type->type_name }}</option>
@@ -533,9 +651,9 @@
                                     <select name="brand_id" class="form-control select2">
                                         <option value="">Select Brand</option>
                                         @foreach($brands as $brand)
-                                            <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                         @endforeach
-                                    </select>
+                                    </select> 
                                 </div>
 
                                 <div class="form-group mb-3">
@@ -561,7 +679,7 @@
                                 <div class="form-group mb-3">
                                     <label>Supplier</label>
                                     <select name="supplier_id" class="form-control select2">
-                                        <option value="">Select Supplier</option>
+                                        <option value="supplier_id">Select Supplier</option>
                                         @foreach($suppliers as $supplier)
                                             <option value="{{ $supplier->id }}">{{ $supplier->supplier_name }}</option>
                                         @endforeach
@@ -575,12 +693,12 @@
 
                                 <div class="form-group mb-3">
                                     <label>Needle Type</label>
-                                    <select name="needle_type" class="form-control select2">
-                                        <option value="">Select Needle Type</option>
+                                    <select name="needle_type_id" class="form-control select2">
+                                        <option value="needle_type_id">Select Needle Type</option>
                                         @foreach($needleTypes as $needle)
-                                            <option value="{{ $needle->id }}">{{ $needle->type_name }}</option>
+                                            <option value="{{ $needle->id }}">{{ $needle->needle_type }}</option>
                                         @endforeach
-                                    </select>
+                                    </select> 
                                 </div>
 
                                 <div class="form-group mb-3">
@@ -601,9 +719,9 @@
                                 <div class="form-group mb-3">
                                     <label>Location</label>
                                     <select name="location_id" class="form-control select2">
-                                        <option value="">Select Location</option>
+                                        <option value="location_id">Select Location</option>
                                         @foreach($locations as $location)
-                                            <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                            <option value="{{ $location->id }}">{{ $location->location_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -616,7 +734,7 @@
                                 <div class="form-group mb-3">
                                     <label>Department</label>
                                     <select name="department_id" class="form-control select2">
-                                        <option value="">Select Department</option>
+                                        <option value="department_id">Select Department</option>
                                         @foreach($departments as $department)
                                             <option value="{{ $department->id }}">{{ $department->department_name }}</option>
                                         @endforeach
@@ -662,9 +780,9 @@
                                 <div class="form-group mb-3">
                                     <label>Factory</label>
                                     <select name="factory_id" class="form-control select2" required>
-                                        <option value="">Select Factory</option>
+                                        <option value="factory_id">Select Factory</option>
                                         @foreach($factories as $factory)
-                                            <option value="{{ $factory->id }}">{{ $factory->name }}</option>
+                                            <option value="{{ $factory->id }}">{{ $factory->short_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

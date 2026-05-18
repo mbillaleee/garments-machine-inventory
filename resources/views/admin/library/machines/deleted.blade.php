@@ -54,9 +54,9 @@
     <div class="container-fluid">
             <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
                 <div class="mb-2">
-                    <h1 class="page-title mb-1">Deleted Departments Management</h1>
+                    <h1 class="page-title mb-1">Deleted Machines Management</h1>
                     <div class="page-subtitle">
-                        Manage deleted application Departments with a cleaner and more user-friendly admin experience.
+                        Manage deleted application machines with a cleaner and more user-friendly admin experience.
                     </div>
                 </div>
             </div>
@@ -90,14 +90,14 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Deleted Departments</h3>
+                <h3 class="card-title">Deleted Machines</h3>
 
                 <div class="card-tools">
-                    <a href="{{ route('admin.departments.index') }}" class="btn btn-tool">
+                    <a href="{{ route('admin.machines.index') }}" class="btn btn-tool">
                         <i class="fas fa-list-alt text-success text-lg"></i>
                     </a>
 
-                    <a href="{{ route('admin.departments.deleteditems') }}" class="btn btn-tool">
+                    <a href="{{ route('admin.machines.deleteditems') }}" class="btn btn-tool">
                         <i class="fas fa-sync-alt text-danger text-lg"></i>
                     </a>
 
@@ -113,10 +113,12 @@
                         <thead>
                             <tr>
                                 <th width="80">#</th>
-                                <th>Department Name</th>
+                                <th>Inventory No</th>
+                                <th>Serial No</th>
+                                <th>Machine Type</th>
+                                <th>Brand</th>
+                                <th>Model</th>
                                 <th>Status</th>
-                                <th>Added By</th>
-                                <th>Updated By</th>
                                 <th>Deleted By</th>
                                 <th>Deleted At</th>
                                 <th width="280" class="text-center">Actions</th>
@@ -131,7 +133,19 @@
                                     </span>
                                 </td>
                                 <td>
-                                    {{ $item->location_name }}
+                                    {{ $item->machine_inventory_number }}
+                                </td>
+                                <td>
+                                    {{ $item->serial_number ?? 'N/A' }}
+                                </td>
+                                <td>
+                                    {{ $item->machineType->name ?? 'N/A' }}
+                                </td>
+                                <td>
+                                    {{ $item->brand->name ?? 'N/A' }}
+                                </td>
+                                <td>
+                                    {{ $item->model->name ?? 'N/A' }}
                                 </td>
                                 <td>
                                     @if($item->status == 1)
@@ -140,29 +154,15 @@
                                         <span class="badge badge-secondary">Inactive</span>
                                     @endif
                                 </td>
-
-                                <td>
-                                    {{ $item->addedByser->name ?? 'N/A' }}
-                                </td>
-                                <td>
-                                    {{ $item->updatedByser->name ?? 'N/A' }}
-                                </td>
-
                                 <td>
                                     {{ $item->deletedByser->name ?? 'N/A' }}
                                 </td>
-
                                 <td>{{ $item->deleted_at ? $item->deleted_at->format('Y-m-d H:i:s') : 'N/A' }}</td>
-
-                                
-
                                 <td class="text-center action-group">
-
-                                    <form method="POST" action="{{ route('admin.locations.restore', $item->id) }}" class="d-inline">
+                                    <form method="POST" action="{{ route('admin.machines.restore', $item->id) }}" class="d-inline">
                                         @csrf
-                                        @method('POST')
                                         <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Are you sure you want to restore this model?')">
+                                            onclick="return confirm('Are you sure you want to restore this machine?')">
                                             <i class="fas fa-undo mr-1"></i>
                                         </button>
                                     </form>
@@ -171,10 +171,10 @@
                             @endforeach
 
                             <tr id="noSearchResultRow" style="display:none;">
-                                <td colspan="4">
+                                <td colspan="10">
                                     <div class="empty-state">
                                         <i class="fas fa-search-minus"></i>
-                                        <div class="font-weight-bold">No matching model found</div>
+                                        <div class="font-weight-bold">No matching machine found</div>
                                         <small>Try searching with another keyword.</small>
                                     </div>
                                 </td>
